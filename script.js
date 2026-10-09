@@ -89,9 +89,10 @@ toTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-/* ============ ФОРМА ЗАПИСИ ============ */
+/* ============ ФОРМА ЗАПИСИ + ОТПРАВКА В FORMSPREE ============ */
 const form = document.getElementById('signupForm');
 const successMsg = document.getElementById('formSuccess');
+const errorGlobal = document.getElementById('formErrorGlobal');
 
 const validators = {
     name: (v) => {
@@ -132,20 +133,21 @@ function validateField(field) {
 }
 
 form.querySelectorAll('input, textarea').forEach(field => {
+    if (!validators[field.name]) return;
     field.addEventListener('blur', () => validateField(field));
     field.addEventListener('input', () => {
-        if (field.closest('.form__group').classList.contains('error')) {
+        if (field.closest('.form__group')?.classList.contains('error')) {
             validateField(field);
         }
     });
 });
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    // 1. Валидация обязательных полей
     const fields = form.querySelectorAll('input[required]');
     let isValid = true;
-
     fields.forEach(field => {
         if (!validateField(field)) isValid = false;
     });
@@ -156,22 +158,43 @@ form.addEventListener('submit', (e) => {
         return;
     }
 
+    // 2. Подготовка к отправке
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
 
     submitBtn.textContent = 'Отправляем…';
     submitBtn.disabled = true;
+    successMsg.classList.remove('show');
+    errorGlobal.classList.remove('show');
 
-    // Имитация отправки — здесь позже можно подключить Formspree / Google Forms / Telegram Bot API
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.log('Заявка:', data);
+    const data = new FormData(form);
 
-    setTimeout(() => {
-        form.reset();
-        successMsg.classList.add('show');
+    try {
+        // 3. Отправка в Formspree
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            // Успех
+            form.reset();
+            successMsg.classList.add('show');
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => successMsg.classList.remove('show'), 8000);
+        } else {
+            // Formspree вернул ошибку
+            const errData = await response.json().catch(() => ({}));
+            console.warn('Formspree error:', errData);
+            errorGlobal.classList.add('show');
+        }
+    } catch (err) {
+        // Проблема с сетью
+        console.error('Ошибка отправки:', err);
+        errorGlobal.classList.add('show');
+    } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
-
-        setTimeout(() => successMsg.classList.remove('show'), 6000);
-    }, 900);
+    }
 });
