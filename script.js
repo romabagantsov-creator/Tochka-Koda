@@ -38,6 +38,37 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+/* ============ 3D FLIP CARD ============ */
+const flipScene = document.getElementById('flipScene');
+const flipCard = document.getElementById('flipCard');
+
+if (flipScene && flipCard) {
+
+    // Переворот по клику
+    flipScene.addEventListener('click', (e) => {
+        // Не переворачиваем, если кликнули по ссылке внутри обратной стороны
+        if (e.target.closest('a')) return;
+        flipCard.classList.toggle('is-flipped');
+    });
+
+    // Переворот по Enter / Space (доступность)
+    flipScene.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            flipCard.classList.toggle('is-flipped');
+        }
+    });
+
+    // Автоподсказка: через 4 секунды после загрузки карточка слегка «дёрнется»,
+    // чтобы пользователь понял, что она интерактивная
+    setTimeout(() => {
+        if (!flipCard.classList.contains('is-flipped')) {
+            flipScene.style.transform = 'translateY(-6px) rotateZ(-1deg)';
+            setTimeout(() => { flipScene.style.transform = ''; }, 350);
+        }
+    }, 4000);
+}
+
 /* ============ АНИМИРОВАННЫЙ ФОН С КОДОМ ============ */
 const codeLinesEl = document.getElementById('codeLines');
 const codeSnippets = [
