@@ -76,18 +76,28 @@
 
         <div class="hero__visual">
     <div class="flip-scene" id="flipScene" tabindex="0" role="button" aria-label="Перевернуть карточку">
-        <div class="flip-card" id="flipCard">
+        <div class="flip-tilt" id="flipTilt">
+            <div class="flip-card" id="flipCard">
 
-            <!-- ЛИЦЕВАЯ СТОРОНА -->
-            <div class="flip-card__face flip-card__face--front">
-                <div class="flip-card__bar">
-                    <span class="dot dot--red"></span>
-                    <span class="dot dot--yellow"></span>
-                    <span class="dot dot--green"></span>
-                    <span class="flip-card__name">game.py</span>
-                </div>
+                <!-- Слой свечения под карточкой -->
+                <div class="flip-card__shadow"></div>
 
-                <pre class="flip-card__body"><code><span class="c-key">class</span> <span class="c-cls">Hero</span>:
+                <!-- Боковые грани (создают толщину) -->
+                <div class="flip-card__edge flip-card__edge--right"></div>
+                <div class="flip-card__edge flip-card__edge--left"></div>
+                <div class="flip-card__edge flip-card__edge--top"></div>
+                <div class="flip-card__edge flip-card__edge--bottom"></div>
+
+                <!-- ЛИЦЕВАЯ СТОРОНА -->
+                <div class="flip-card__face flip-card__face--front">
+                    <div class="flip-card__bar">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--yellow"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="flip-card__name">game.py</span>
+                    </div>
+
+                    <pre class="flip-card__body"><code><span class="c-key">class</span> <span class="c-cls">Hero</span>:
     <span class="c-key">def</span> <span class="c-fn">__init__</span>(self, name):
         self.name = name
         self.level = <span class="c-num">1</span>
@@ -99,65 +109,71 @@
 me = Hero(<span class="c-str">"Ученик"</span>)
 <span class="c-fn">print</span>(me.learn())</code></pre>
 
-                <div class="flip-card__hint">
-                    <span>💡</span> Нажми на карточку
-                </div>
-            </div>
-
-            <!-- ОБРАТНАЯ СТОРОНА -->
-            <div class="flip-card__face flip-card__face--back">
-                <div class="flip-card__back-glow"></div>
-
-                <div class="flip-card__back-head">
-                    <div class="flip-card__logo">
-                        <span class="logo__bracket">&lt;</span>
-                        <span class="logo__text">Точка Кода</span>
-                        <span class="logo__bracket">/&gt;</span>
+                    <div class="flip-card__hint">
+                        <span>💡</span> Нажми на карточку
                     </div>
-                    <div class="flip-card__subtitle">Курс Python для школьников</div>
+
+                    <!-- Блик, следующий за курсором -->
+                    <div class="flip-card__shine" id="cardShine"></div>
                 </div>
 
-                <ul class="flip-card__features">
-                    <li>
-                        <span class="flip-card__icon">🎯</span>
-                        <div>
-                            <b>12 занятий</b>
-                            <small>от нуля до своей игры</small>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="flip-card__icon">⚡</span>
-                        <div>
-                            <b>Практика сразу</b>
-                            <small>первый код — на 1-м уроке</small>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="flip-card__icon">👥</span>
-                        <div>
-                            <b>Мини-группы</b>
-                            <small>до 6 человек</small>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="flip-card__icon">🎁</span>
-                        <div>
-                            <b>Первое занятие — 0₽</b>
-                            <small>без обязательств</small>
-                        </div>
-                    </li>
-                </ul>
+                <!-- ОБРАТНАЯ СТОРОНА -->
+                <div class="flip-card__face flip-card__face--back">
+                    <div class="flip-card__back-glow"></div>
 
-                <a href="#signup" class="flip-card__cta">
-                    Записаться
-                    <span class="btn__arrow">→</span>
-                </a>
+                    <div class="flip-card__back-head">
+                        <div class="flip-card__logo">
+                            <span class="logo__bracket">&lt;</span>
+                            <span class="logo__text">Точка Кода</span>
+                            <span class="logo__bracket">/&gt;</span>
+                        </div>
+                        <div class="flip-card__subtitle">Курс Python для школьников</div>
+                    </div>
 
-                <div class="flip-card__hint flip-card__hint--back">
-                    <span>↩</span> Нажми, чтобы вернуть
+                    <ul class="flip-card__features">
+                        <li>
+                            <span class="flip-card__icon">🎯</span>
+                            <div>
+                                <b>12 занятий</b>
+                                <small>от нуля до своей игры</small>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="flip-card__icon">⚡</span>
+                            <div>
+                                <b>Практика сразу</b>
+                                <small>первый код — на 1-м уроке</small>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="flip-card__icon">👥</span>
+                            <div>
+                                <b>Мини-группы</b>
+                                <small>до 6 человек</small>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="flip-card__icon">🎁</span>
+                            <div>
+                                <b>Первое занятие — 0₽</b>
+                                <small>без обязательств</small>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#signup" class="flip-card__cta">
+                        Записаться
+                        <span class="btn__arrow">→</span>
+                    </a>
+
+                    <div class="flip-card__hint flip-card__hint--back">
+                        <span>↩</span> Нажми, чтобы вернуть
+                    </div>
+
+                    <div class="flip-card__shine"></div>
                 </div>
+
             </div>
-
         </div>
     </div>
 </div>
