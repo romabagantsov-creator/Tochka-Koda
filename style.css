@@ -321,10 +321,10 @@ a { color: inherit; text-decoration: none; }
     margin-top: 4px;
 }
 
-/* ============ 3D FLIP CARD ============ */
+/* ============ 3D FLIP CARD (объёмная) ============ */
 .hero__visual {
     animation: fadeUp 0.8s 0.3s ease both;
-    perspective: 1600px;
+    perspective: 2000px;
 }
 
 .flip-scene {
@@ -333,9 +333,7 @@ a { color: inherit; text-decoration: none; }
     margin-left: auto;
     cursor: pointer;
     outline: none;
-    /* перспектива для 3D */
-    perspective: 1600px;
-    /* плавный «подлёт» при наведении */
+    perspective: 2000px;
     transition: transform 0.4s ease;
 }
 
@@ -346,19 +344,112 @@ a { color: inherit; text-decoration: none; }
     border-radius: var(--radius);
 }
 
+/* Обёртка, которая наклоняется за мышкой */
+.flip-tilt {
+    position: relative;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.25, 1);
+    will-change: transform;
+}
+
+/* Когда карточка переворачивается — отключаем tilt, чтобы не мешал */
+.flip-card.is-flipped ~ * { pointer-events: none; }
+
 .flip-card {
     position: relative;
     width: 100%;
     aspect-ratio: 4 / 5;
     transform-style: preserve-3d;
-    transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.25, 1);
+    transition: transform 1s cubic-bezier(0.2, 0.8, 0.25, 1);
+    will-change: transform;
 }
 
 .flip-card.is-flipped {
     transform: rotateY(180deg);
 }
 
-/* Общее для обеих сторон */
+/* ---------- Тень под карточкой ---------- */
+.flip-card__shadow {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: -22px;
+    height: 40px;
+    background: radial-gradient(ellipse at center,
+        rgba(74, 222, 128, 0.35) 0%,
+        rgba(56, 189, 248, 0.2) 40%,
+        transparent 75%);
+    filter: blur(22px);
+    transform: translateZ(-80px);
+    pointer-events: none;
+    z-index: -2;
+}
+
+/* ---------- Боковые грани — создают толщину ---------- */
+.flip-card__edge {
+    position: absolute;
+    background: linear-gradient(135deg, #1e2b45 0%, #131c2e 100%);
+    border: 1px solid var(--border);
+    pointer-events: none;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* Толщина карточки */
+:root { --card-thickness: 18px; }
+
+/* Правая грань */
+.flip-card__edge--right {
+    top: 8px;
+    bottom: 8px;
+    right: 0;
+    width: var(--card-thickness);
+    transform-origin: right center;
+    transform: rotateY(-90deg) translateX(var(--card-thickness));
+    border-radius: 2px 8px 8px 2px;
+    box-shadow: inset -4px 0 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Левая грань */
+.flip-card__edge--left {
+    top: 8px;
+    bottom: 8px;
+    left: 0;
+    width: var(--card-thickness);
+    transform-origin: left center;
+    transform: rotateY(90deg) translateX(calc(-1 * var(--card-thickness)));
+    border-radius: 8px 2px 2px 8px;
+    box-shadow: inset 4px 0 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Верхняя грань */
+.flip-card__edge--top {
+    left: 8px;
+    right: 8px;
+    top: 0;
+    height: var(--card-thickness);
+    transform-origin: top center;
+    transform: rotateX(90deg) translateY(calc(-1 * var(--card-thickness)));
+    border-radius: 8px 8px 2px 2px;
+    box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(180deg, #24314f 0%, #1a2436 100%);
+}
+
+/* Нижняя грань */
+.flip-card__edge--bottom {
+    left: 8px;
+    right: 8px;
+    bottom: 0;
+    height: var(--card-thickness);
+    transform-origin: bottom center;
+    transform: rotateX(-90deg) translateY(var(--card-thickness));
+    border-radius: 2px 2px 8px 8px;
+    box-shadow: inset 0 -4px 12px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(0deg, #24314f 0%, #1a2436 100%);
+}
+
+/* ---------- Общее для обеих сторон ---------- */
 .flip-card__face {
     position: absolute;
     inset: 0;
@@ -371,13 +462,40 @@ a { color: inherit; text-decoration: none; }
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transform-style: preserve-3d;
+    /* Толщина: обе стороны разнесены на половину толщины */
+    transform: translateZ(calc(var(--card-thickness) / 2));
 }
 
-/* ------- Лицевая сторона ------- */
 .flip-card__face--front {
-    transform: rotateY(0deg);
+    transform: translateZ(calc(var(--card-thickness) / 2));
 }
 
+.flip-card__face--back {
+    transform: rotateY(180deg) translateZ(calc(var(--card-thickness) / 2));
+}
+
+/* ---------- Блик, следящий за курсором ---------- */
+.flip-card__shine {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at var(--shine-x, 50%) var(--shine-y, 50%),
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(255, 255, 255, 0.05) 25%,
+        transparent 55%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+    z-index: 3;
+}
+
+.flip-scene:hover .flip-card__shine { opacity: 1; }
+
+/* ---------- Панель «браузера» на лицевой стороне ---------- */
 .flip-card__bar {
     display: flex;
     align-items: center;
@@ -422,9 +540,8 @@ a { color: inherit; text-decoration: none; }
     50% { opacity: 1; }
 }
 
-/* ------- Обратная сторона ------- */
+/* ---------- Обратная сторона ---------- */
 .flip-card__face--back {
-    transform: rotateY(180deg);
     background: linear-gradient(160deg, #101a2e 0%, #0d1524 100%);
     padding: 28px;
     justify-content: space-between;
@@ -538,14 +655,14 @@ a { color: inherit; text-decoration: none; }
     opacity: 0.6;
 }
 
-/* Цвета для синтаксиса (оставляем) */
+/* Цвета синтаксиса */
 .c-key { color: #cba6f7; }
 .c-cls { color: #f9e2af; }
 .c-fn { color: #89b4fa; }
 .c-num { color: #fab387; }
 .c-str { color: #a6e3a1; }
 
-/* Адаптив для карточки */
+/* ---------- Адаптив ---------- */
 @media (max-width: 960px) {
     .flip-scene {
         max-width: 420px;
@@ -555,6 +672,13 @@ a { color: inherit; text-decoration: none; }
     .flip-card__body { font-size: 0.78rem; padding: 18px; }
     .flip-card__features li { padding: 8px 10px; }
     .flip-card__icon { font-size: 1.2rem; width: 30px; }
+    :root { --card-thickness: 14px; }
+}
+
+/* На тач-устройствах tilt выключаем — оставляем только переворот */
+@media (hover: none) {
+    .flip-tilt { transform: none !important; }
+    .flip-card__shine { display: none; }
 }
 
 /* ============ PROGRAM ============ */
