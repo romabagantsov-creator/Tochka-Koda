@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://romabagantsov-creator.github.io/tochka-koda/sitemap.xml
