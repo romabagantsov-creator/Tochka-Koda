@@ -17,7 +17,7 @@
     <div class="container header__inner">
         <a href="#hero" class="logo">
             <span class="logo__bracket">&lt;</span>
-            <span class="logo__text">Точка Кода </span>
+            <span class="logo__text">Точка Кода</span>
             <span class="logo__bracket">/&gt;</span>
         </a>
 
@@ -48,7 +48,7 @@
                 начинается с <span class="accent">Точки Кода</span>
             </h1>
             <p class="hero__subtitle">
-                Курс Python для школьников, где за 12 занятий ты полностью изучишь Python.
+                Курс Python для школьников, где за 12 занятий ты напишешь свою первую игру.
                 Без скучной теории — только практика и живые проекты.
             </p>
             <div class="hero__actions">
@@ -259,7 +259,18 @@ me = Hero(<span class="c-str">"Ученик"</span>)
                 </ul>
             </div>
 
-            <form class="form" id="signupForm" novalidate>
+            <form
+                class="form"
+                id="signupForm"
+                action="https://formspree.io/f/mvkzalkb"
+                method="POST"
+                novalidate
+            >
+                <!-- Служебные поля Formspree -->
+                <input type="hidden" name="_subject" value="🎓 Новая заявка с сайта Точка Кода">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_language" value="ru">
+
                 <div class="form__group">
                     <label for="name">Имя ученика</label>
                     <input type="text" id="name" name="name" placeholder="Например, Артём" required>
@@ -293,6 +304,10 @@ me = Hero(<span class="c-str">"Ученик"</span>)
 
                 <div class="form__success" id="formSuccess">
                     ✅ Спасибо! Заявка отправлена. Я свяжусь с вами в ближайшее время.
+                </div>
+
+                <div class="form__error-global" id="formErrorGlobal">
+                    ⚠️ Не удалось отправить заявку. Попробуйте ещё раз или напишите мне напрямую.
                 </div>
             </form>
         </div>
