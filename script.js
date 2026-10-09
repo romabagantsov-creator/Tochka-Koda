@@ -26,6 +26,81 @@ nav.querySelectorAll('.nav__link').forEach(link => {
     });
 });
 
+/* ============ 3D FLIP CARD (объёмная + tilt) ============ */
+const flipScene = document.getElementById('flipScene');
+const flipCard  = document.getElementById('flipCard');
+const flipTilt  = document.getElementById('flipTilt');
+const cardShine = document.getElementById('cardShine');
+
+if (flipScene && flipCard && flipTilt) {
+
+    let isFlipped = false;
+
+    /* --- Переворот по клику --- */
+    flipScene.addEventListener('click', (e) => {
+        // клик по ссылке внутри — не переворачиваем
+        if (e.target.closest('a')) return;
+
+        isFlipped = !isFlipped;
+        flipCard.classList.toggle('is-flipped', isFlipped);
+
+        // при перевороте обнуляем tilt, чтобы карточка встала ровно
+        if (isFlipped) {
+            flipTilt.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        }
+    });
+
+    /* --- Переворот с клавиатуры --- */
+    flipScene.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            flipScene.click();
+        }
+    });
+
+    /* --- Tilt: наклон за курсором --- */
+    const MAX_TILT = 14;
+    const shineEls = flipScene.querySelectorAll('.flip-card__shine');
+
+    flipScene.addEventListener('mousemove', (e) => {
+        if (isFlipped) return;
+
+        const rect = flipScene.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const px = x / rect.width;
+        const py = y / rect.height;
+
+        const rotY = (px - 0.5) * 2 * MAX_TILT;
+        const rotX = (0.5 - py) * 2 * MAX_TILT;
+
+        flipTilt.style.transform =
+            `rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
+
+        shineEls.forEach(el => {
+            el.style.setProperty('--shine-x', (px * 100).toFixed(1) + '%');
+            el.style.setProperty('--shine-y', (py * 100).toFixed(1) + '%');
+        });
+    });
+
+    /* --- Возврат в исходное положение --- */
+    flipScene.addEventListener('mouseleave', () => {
+        if (isFlipped) return;
+        flipTilt.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+
+    /* --- Авто-подсказка через 4 секунды --- */
+    setTimeout(() => {
+        if (!isFlipped) {
+            flipTilt.style.transform = 'rotateX(-6deg) rotateY(8deg)';
+            setTimeout(() => {
+                flipTilt.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            }, 500);
+        }
+    }, 4000);
+}
+
 /* ============ АНИМАЦИЯ ПОЯВЛЕНИЯ БЛОКОВ ============ */
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -37,37 +112,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-/* ============ 3D FLIP CARD ============ */
-const flipScene = document.getElementById('flipScene');
-const flipCard = document.getElementById('flipCard');
-
-if (flipScene && flipCard) {
-
-    // Переворот по клику
-    flipScene.addEventListener('click', (e) => {
-        // Не переворачиваем, если кликнули по ссылке внутри обратной стороны
-        if (e.target.closest('a')) return;
-        flipCard.classList.toggle('is-flipped');
-    });
-
-    // Переворот по Enter / Space (доступность)
-    flipScene.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            flipCard.classList.toggle('is-flipped');
-        }
-    });
-
-    // Автоподсказка: через 4 секунды после загрузки карточка слегка «дёрнется»,
-    // чтобы пользователь понял, что она интерактивная
-    setTimeout(() => {
-        if (!flipCard.classList.contains('is-flipped')) {
-            flipScene.style.transform = 'translateY(-6px) rotateZ(-1deg)';
-            setTimeout(() => { flipScene.style.transform = ''; }, 350);
-        }
-    }, 4000);
-}
 
 /* ============ АНИМИРОВАННЫЙ ФОН С КОДОМ ============ */
 const codeLinesEl = document.getElementById('codeLines');
@@ -209,19 +253,16 @@ form.addEventListener('submit', async (e) => {
         });
 
         if (response.ok) {
-            // Успех
             form.reset();
             successMsg.classList.add('show');
             successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
             setTimeout(() => successMsg.classList.remove('show'), 8000);
         } else {
-            // Formspree вернул ошибку
             const errData = await response.json().catch(() => ({}));
             console.warn('Formspree error:', errData);
             errorGlobal.classList.add('show');
         }
     } catch (err) {
-        // Проблема с сетью
         console.error('Ошибка отправки:', err);
         errorGlobal.classList.add('show');
     } finally {
