@@ -48,7 +48,7 @@
                 начинается с <span class="accent">Точки Кода</span>
             </h1>
             <p class="hero__subtitle">
-                Курс Python для школьников, где за 12 занятий ты напишешь свою первую программу.
+                Курс Python для школьников, где за 12 занятий ты напишешь свою первую игру.
                 Без скучной теории — только практика и живые проекты.
             </p>
             <div class="hero__actions">
@@ -61,7 +61,7 @@
             <div class="hero__stats">
                 <div class="stat">
                     <div class="stat__num">12</div>
-                    <div class="stat__label">занятий в месяц</div>
+                    <div class="stat__label">занятий</div>
                 </div>
                 <div class="stat">
                     <div class="stat__num">1</div>
@@ -74,30 +74,31 @@
             </div>
         </div>
 
+        <!-- ====== ОБЪЁМНАЯ 3D-КАРТОЧКА ====== -->
         <div class="hero__visual">
-    <div class="flip-scene" id="flipScene" tabindex="0" role="button" aria-label="Перевернуть карточку">
-        <div class="flip-tilt" id="flipTilt">
-            <div class="flip-card" id="flipCard">
+            <div class="flip-scene" id="flipScene" tabindex="0" role="button" aria-label="Перевернуть карточку">
+                <div class="flip-tilt" id="flipTilt">
+                    <div class="flip-card" id="flipCard">
 
-                <!-- Слой свечения под карточкой -->
-                <div class="flip-card__shadow"></div>
+                        <!-- Тень под карточкой -->
+                        <div class="flip-card__shadow"></div>
 
-                <!-- Боковые грани (создают толщину) -->
-                <div class="flip-card__edge flip-card__edge--right"></div>
-                <div class="flip-card__edge flip-card__edge--left"></div>
-                <div class="flip-card__edge flip-card__edge--top"></div>
-                <div class="flip-card__edge flip-card__edge--bottom"></div>
+                        <!-- Боковые грани (толщина) -->
+                        <div class="flip-card__edge flip-card__edge--right"></div>
+                        <div class="flip-card__edge flip-card__edge--left"></div>
+                        <div class="flip-card__edge flip-card__edge--top"></div>
+                        <div class="flip-card__edge flip-card__edge--bottom"></div>
 
-                <!-- ЛИЦЕВАЯ СТОРОНА -->
-                <div class="flip-card__face flip-card__face--front">
-                    <div class="flip-card__bar">
-                        <span class="dot dot--red"></span>
-                        <span class="dot dot--yellow"></span>
-                        <span class="dot dot--green"></span>
-                        <span class="flip-card__name">game.py</span>
-                    </div>
+                        <!-- ЛИЦЕВАЯ СТОРОНА -->
+                        <div class="flip-card__face flip-card__face--front">
+                            <div class="flip-card__bar">
+                                <span class="dot dot--red"></span>
+                                <span class="dot dot--yellow"></span>
+                                <span class="dot dot--green"></span>
+                                <span class="flip-card__name">game.py</span>
+                            </div>
 
-                    <pre class="flip-card__body"><code><span class="c-key">class</span> <span class="c-cls">Hero</span>:
+                            <pre class="flip-card__body"><code><span class="c-key">class</span> <span class="c-cls">Hero</span>:
     <span class="c-key">def</span> <span class="c-fn">__init__</span>(self, name):
         self.name = name
         self.level = <span class="c-num">1</span>
@@ -109,74 +110,74 @@
 me = Hero(<span class="c-str">"Ученик"</span>)
 <span class="c-fn">print</span>(me.learn())</code></pre>
 
-                    <div class="flip-card__hint">
-                        <span>💡</span> Нажми на карточку
-                    </div>
+                            <div class="flip-card__hint">
+                                <span>💡</span> Нажми на карточку
+                            </div>
 
-                    <!-- Блик, следующий за курсором -->
-                    <div class="flip-card__shine" id="cardShine"></div>
-                </div>
-
-                <!-- ОБРАТНАЯ СТОРОНА -->
-                <div class="flip-card__face flip-card__face--back">
-                    <div class="flip-card__back-glow"></div>
-
-                    <div class="flip-card__back-head">
-                        <div class="flip-card__logo">
-                            <span class="logo__bracket">&lt;</span>
-                            <span class="logo__text">Точка Кода</span>
-                            <span class="logo__bracket">/&gt;</span>
+                            <div class="flip-card__shine" id="cardShine"></div>
                         </div>
-                        <div class="flip-card__subtitle">Курс Python для школьников</div>
+
+                        <!-- ОБРАТНАЯ СТОРОНА -->
+                        <div class="flip-card__face flip-card__face--back">
+                            <div class="flip-card__back-glow"></div>
+
+                            <div class="flip-card__back-head">
+                                <div class="flip-card__logo">
+                                    <span class="logo__bracket">&lt;</span>
+                                    <span class="logo__text">Точка Кода</span>
+                                    <span class="logo__bracket">/&gt;</span>
+                                </div>
+                                <div class="flip-card__subtitle">Курс Python для школьников</div>
+                            </div>
+
+                            <ul class="flip-card__features">
+                                <li>
+                                    <span class="flip-card__icon">🎯</span>
+                                    <div>
+                                        <b>12 занятий</b>
+                                        <small>от нуля до своей игры</small>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="flip-card__icon">⚡</span>
+                                    <div>
+                                        <b>Практика сразу</b>
+                                        <small>первый код — на 1-м уроке</small>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="flip-card__icon">👥</span>
+                                    <div>
+                                        <b>Мини-группы</b>
+                                        <small>до 6 человек</small>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="flip-card__icon">🎁</span>
+                                    <div>
+                                        <b>Первое занятие — 0₽</b>
+                                        <small>без обязательств</small>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <a href="#signup" class="flip-card__cta">
+                                Записаться
+                                <span class="btn__arrow">→</span>
+                            </a>
+
+                            <div class="flip-card__hint flip-card__hint--back">
+                                <span>↩</span> Нажми, чтобы вернуть
+                            </div>
+
+                            <div class="flip-card__shine"></div>
+                        </div>
+
                     </div>
-
-                    <ul class="flip-card__features">
-                        <li>
-                            <span class="flip-card__icon">🎯</span>
-                            <div>
-                                <b>12 занятий</b>
-                                <small>от нуля до своей игры</small>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="flip-card__icon">⚡</span>
-                            <div>
-                                <b>Практика сразу</b>
-                                <small>первый код — на 1-м уроке</small>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="flip-card__icon">👥</span>
-                            <div>
-                                <b>Мини-группы</b>
-                                <small>до 6 человек</small>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="flip-card__icon">🎁</span>
-                            <div>
-                                <b>Первое занятие — 0₽</b>
-                                <small>без обязательств</small>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <a href="#signup" class="flip-card__cta">
-                        Записаться
-                        <span class="btn__arrow">→</span>
-                    </a>
-
-                    <div class="flip-card__hint flip-card__hint--back">
-                        <span>↩</span> Нажми, чтобы вернуть
-                    </div>
-
-                    <div class="flip-card__shine"></div>
                 </div>
-
             </div>
         </div>
-    </div>
-</div>
+        <!-- ====== /ОБЪЁМНАЯ 3D-КАРТОЧКА ====== -->
     </div>
 </section>
 
@@ -262,18 +263,19 @@ me = Hero(<span class="c-str">"Ученик"</span>)
             <div class="section__tag">// Преподаватель</div>
             <h2 class="section__title">Привет, я Роман 👋</h2>
             <p>
-                Я разработчик и преподаватель. Больше 5 лет пишу на разных языках программирования и делаю веб-проекты,
+                Я разработчик и преподаватель. Больше 5 лет пишу на Python и делаю веб-проекты,
                 а последние годы учу школьников программировать так, чтобы им было <b>интересно</b>,
                 а не страшно.
             </p>
             <p>
                 Мой подход простой: меньше сухой теории — больше кода, экспериментов и своих проектов.
-                Ошибки — это часть пути.
+                Ошибки — это нормально, именно на них и учится программист.
             </p>
             <div class="teacher__list">
                 <div class="teacher__item"><span>✓</span> Объясняю сложное простыми словами</div>
+                <div class="teacher__item"><span>✓</span> Помогаю, а не ругаю за ошибки</div>
                 <div class="teacher__item"><span>✓</span> С первого занятия — реальный код</div>
-                <div class="teacher__item"><span>✓</span> Каждому ученику — свой подход</div>
+                <div class="teacher__item"><span>✓</span> Каждому ученику — своё внимание</div>
             </div>
         </div>
     </div>
@@ -306,12 +308,12 @@ me = Hero(<span class="c-str">"Ученик"</span>)
             <div class="advantage reveal">
                 <div class="advantage__icon">🏆</div>
                 <h3>Результат</h3>
-                <p>В конце курса — своя работающая игра и сертификат о прохождении курсов.</p>
+                <p>В конце курса — своя работающая игра и сертификат о прохождении.</p>
             </div>
             <div class="advantage reveal">
                 <div class="advantage__icon">👥</div>
                 <h3>Мини-группы</h3>
-                <p>До 4 человек в группе, чтобы каждому хватило внимания преподавателя.</p>
+                <p>До 6 человек в группе, чтобы каждому хватило внимания преподавателя.</p>
             </div>
             <div class="advantage reveal">
                 <div class="advantage__icon">🕐</div>
