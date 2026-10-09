@@ -321,97 +321,240 @@ a { color: inherit; text-decoration: none; }
     margin-top: 4px;
 }
 
-/* Code card */
+/* ============ 3D FLIP CARD ============ */
 .hero__visual {
     animation: fadeUp 0.8s 0.3s ease both;
+    perspective: 1600px;
 }
 
-.code-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+.flip-scene {
+    width: 100%;
+    max-width: 480px;
+    margin-left: auto;
+    cursor: pointer;
+    outline: none;
+    /* перспектива для 3D */
+    perspective: 1600px;
+    /* плавный «подлёт» при наведении */
+    transition: transform 0.4s ease;
+}
+
+.flip-scene:hover { transform: translateY(-4px); }
+
+.flip-scene:focus-visible {
+    filter: drop-shadow(0 0 0 3px rgba(74, 222, 128, 0.5));
     border-radius: var(--radius);
-    overflow: hidden;
+}
+
+.flip-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+.flip-card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+/* Общее для обеих сторон */
+.flip-card__face {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface);
     box-shadow: var(--shadow);
-    transform: perspective(1000px) rotateY(-6deg) rotateX(2deg);
-    transition: transform 0.5s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.code-card:hover {
-    transform: perspective(1000px) rotateY(0) rotateX(0);
+/* ------- Лицевая сторона ------- */
+.flip-card__face--front {
+    transform: rotateY(0deg);
 }
 
-.code-card__bar {
+.flip-card__bar {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 14px 18px;
     background: var(--surface-2);
     border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
 }
 
-.dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-}
-.dot--red { background: #ff5f56; }
-.dot--yellow { background: #ffbd2e; }
-.dot--green { background: #27c93f; }
-
-.code-card__name {
+.flip-card__name {
     margin-left: 12px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     color: var(--text-muted);
 }
 
-.code-card__body {
+.flip-card__body {
+    flex: 1;
     padding: 24px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     line-height: 1.8;
-    overflow-x: auto;
     color: #cdd6f4;
+    overflow: hidden;
+    white-space: pre-wrap;
 }
 
+.flip-card__hint {
+    padding: 12px 18px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    background: rgba(10, 14, 26, 0.4);
+    flex-shrink: 0;
+    animation: hintPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* ------- Обратная сторона ------- */
+.flip-card__face--back {
+    transform: rotateY(180deg);
+    background: linear-gradient(160deg, #101a2e 0%, #0d1524 100%);
+    padding: 28px;
+    justify-content: space-between;
+    position: relative;
+}
+
+.flip-card__back-glow {
+    position: absolute;
+    top: -40%; right: -40%;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(74, 222, 128, 0.25), transparent 70%);
+    filter: blur(30px);
+    pointer-events: none;
+}
+
+.flip-card__back-head {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.flip-card__logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: inline-flex;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.flip-card__subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.flip-card__features {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    margin: 12px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.flip-card__features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.flip-card__features li:hover {
+    transform: translateX(4px);
+    background: rgba(74, 222, 128, 0.08);
+    border-color: rgba(74, 222, 128, 0.25);
+}
+
+.flip-card__icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 36px;
+    text-align: center;
+}
+
+.flip-card__features b {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.flip-card__features small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.flip-card__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: var(--gradient);
+    color: #0a0e1a;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+    margin: 4px auto 8px;
+    align-self: center;
+}
+
+.flip-card__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(74, 222, 128, 0.35);
+}
+
+.flip-card__cta:hover .btn__arrow { transform: translateX(4px); }
+.flip-card__cta .btn__arrow { transition: transform 0.3s ease; }
+
+.flip-card__hint--back {
+    border-top-color: rgba(255, 255, 255, 0.08);
+    background: transparent;
+    animation: none;
+    opacity: 0.6;
+}
+
+/* Цвета для синтаксиса (оставляем) */
 .c-key { color: #cba6f7; }
 .c-cls { color: #f9e2af; }
 .c-fn { color: #89b4fa; }
 .c-num { color: #fab387; }
 .c-str { color: #a6e3a1; }
 
-/* ============ SECTIONS ============ */
-.section {
-    padding: 100px 0;
-    position: relative;
-}
-
-.section--alt {
-    background: var(--bg-alt);
-}
-
-.section__head {
-    max-width: 720px;
-    margin-bottom: 60px;
-}
-
-.section__tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-    color: var(--accent);
-    margin-bottom: 16px;
-}
-
-.section__title {
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -1px;
-    margin-bottom: 20px;
-}
-
-.section__lead {
-    color: var(--text-muted);
-    font-size: 1.05rem;
+/* Адаптив для карточки */
+@media (max-width: 960px) {
+    .flip-scene {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+    .flip-card { aspect-ratio: 5 / 6; }
+    .flip-card__body { font-size: 0.78rem; padding: 18px; }
+    .flip-card__features li { padding: 8px 10px; }
+    .flip-card__icon { font-size: 1.2rem; width: 30px; }
 }
 
 /* ============ PROGRAM ============ */
