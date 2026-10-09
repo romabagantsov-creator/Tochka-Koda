@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Точка Кода — Курсы программирования для школьников</title>
+    <meta name="description" content="Курс Python для начинающих 12–16 лет. Практика, своя игра и 12 занятий. Первое занятие бесплатно!">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+    <div class="container header__inner">
+        <a href="#hero" class="logo">
+            <span class="logo__bracket">&lt;</span>
+            <span class="logo__text">Точка Кода </span>
+            <span class="logo__bracket">/&gt;</span>
+        </a>
+
+        <nav class="nav" id="nav">
+            <a href="#program" class="nav__link">Программа</a>
+            <a href="#teacher" class="nav__link">Преподаватель</a>
+            <a href="#advantages" class="nav__link">Преимущества</a>
+            <a href="#signup" class="nav__link nav__link--cta">Записаться</a>
+        </nav>
+
+        <button class="burger" id="burger" aria-label="Меню">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+    <div class="hero__bg">
+        <div class="hero__code-lines" id="codeLines"></div>
+    </div>
+
+    <div class="container hero__inner">
+        <div class="hero__content">
+            <div class="hero__badge">🚀 Набор открыт • 12–16 лет</div>
+            <h1 class="hero__title">
+                Программирование<br>
+                начинается с <span class="accent">Точки Кода</span>
+            </h1>
+            <p class="hero__subtitle">
+                Курс Python для школьников, где за 12 занятий ты полностью изучишь Python.
+                Без скучной теории — только практика и живые проекты.
+            </p>
+            <div class="hero__actions">
+                <a href="#signup" class="btn btn--primary">
+                    Записаться бесплатно
+                    <span class="btn__arrow">→</span>
+                </a>
+                <a href="#program" class="btn btn--ghost">Программа курса</a>
+            </div>
+            <div class="hero__stats">
+                <div class="stat">
+                    <div class="stat__num">12</div>
+                    <div class="stat__label">занятий</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__num">1</div>
+                    <div class="stat__label">своя игра</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__num">0₽</div>
+                    <div class="stat__label">первый урок</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero__visual">
+            <div class="code-card">
+                <div class="code-card__bar">
+                    <span class="dot dot--red"></span>
+                    <span class="dot dot--yellow"></span>
+                    <span class="dot dot--green"></span>
+                    <span class="code-card__name">game.py</span>
+                </div>
+                <pre class="code-card__body"><code><span class="c-key">class</span> <span class="c-cls">Hero</span>:
+    <span class="c-key">def</span> <span class="c-fn">__init__</span>(self, name):
+        self.name = name
+        self.level = <span class="c-num">1</span>
+
+    <span class="c-key">def</span> <span class="c-fn">learn</span>(self):
+        self.level += <span class="c-num">1</span>
+        <span class="c-key">return</span> <span class="c-str">"Точка Кода 🚀"</span>
+
+me = Hero(<span class="c-str">"Ученик"</span>)
+<span class="c-fn">print</span>(me.learn())</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PROGRAM ============ -->
+<section class="section" id="program">
+    <div class="container">
+        <div class="section__head reveal">
+            <div class="section__tag">// Программа</div>
+            <h2 class="section__title">Курс Python для начинающих</h2>
+            <p class="section__lead">
+                Программа рассчитана на 12 занятий для ребят 12–16 лет.
+                Начинаем с нуля и заканчиваем собственной игрой, которую можно показать друзьям.
+            </p>
+        </div>
+
+        <div class="program-grid">
+            <div class="program-card reveal">
+                <div class="program-card__num">01</div>
+                <h3>Основы Python</h3>
+                <p>Переменные, типы данных, ввод и вывод, условия. Первые работающие программы уже на первом занятии.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-card__num">02</div>
+                <h3>Циклы и логика</h3>
+                <p>Циклы, списки, функции. Учимся думать как программист и решать практические задачи.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-card__num">03</div>
+                <h3>Мини-проекты</h3>
+                <p>Калькулятор, угадай число, генератор паролей — каждую тему закрепляем реальным кодом.</p>
+            </div>
+            <div class="program-card reveal">
+                <div class="program-card__num">04</div>
+                <h3>Своя игра</h3>
+                <p>Финальный проект: пишем 2D-игру на Pygame. Управление, спрайты, счёт, победа и поражение.</p>
+            </div>
+        </div>
+
+        <div class="timeline reveal">
+            <h3 class="timeline__title">Как проходит обучение</h3>
+            <div class="timeline__items">
+                <div class="timeline__item">
+                    <div class="timeline__dot"></div>
+                    <h4>Живые занятия</h4>
+                    <p>Онлайн или офлайн, 60–90 минут, с разбором каждой строчки кода.</p>
+                </div>
+                <div class="timeline__item">
+                    <div class="timeline__dot"></div>
+                    <h4>Практика на каждом уроке</h4>
+                    <p>Минимум теории — сразу пишем код и решаем задачи.</p>
+                </div>
+                <div class="timeline__item">
+                    <div class="timeline__dot"></div>
+                    <h4>Домашние задания</h4>
+                    <p>С обратной связью от преподавателя и разбором ошибок.</p>
+                </div>
+                <div class="timeline__item">
+                    <div class="timeline__dot"></div>
+                    <h4>Финальный проект</h4>
+                    <p>Каждый ученик защищает свою игру и получает сертификат.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TEACHER ============ -->
+<section class="section section--alt" id="teacher">
+    <div class="container teacher">
+        <div class="teacher__photo reveal">
+            <div class="teacher__photo-frame">
+                <img src="images/teacher.jpg" alt="Преподаватель Роман" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo');">
+                <div class="teacher__placeholder">👨‍💻</div>
+            </div>
+            <div class="teacher__badges">
+                <span>Python</span>
+                <span>Pygame</span>
+                <span>Web</span>
+            </div>
+        </div>
+
+        <div class="teacher__content reveal">
+            <div class="section__tag">// Преподаватель</div>
+            <h2 class="section__title">Привет, я Роман 👋</h2>
+            <p>
+                Я разработчик и преподаватель. Больше 5 лет пишу на Python и делаю веб-проекты,
+                а последние годы учу школьников программировать так, чтобы им было <b>интересно</b>,
+                а не страшно.
+            </p>
+            <p>
+                Мой подход простой: меньше сухой теории — больше кода, экспериментов и своих проектов.
+                Ошибки — это нормально, именно на них и учится программист.
+            </p>
+            <div class="teacher__list">
+                <div class="teacher__item"><span>✓</span> Объясняю сложное простыми словами</div>
+                <div class="teacher__item"><span>✓</span> Помогаю, а не ругаю за ошибки</div>
+                <div class="teacher__item"><span>✓</span> С первого занятия — реальный код</div>
+                <div class="teacher__item"><span>✓</span> Каждому ученику — своё внимание</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ADVANTAGES ============ -->
+<section class="section" id="advantages">
+    <div class="container">
+        <div class="section__head reveal">
+            <div class="section__tag">// Почему мы</div>
+            <h2 class="section__title">Почему новичку будет комфортно</h2>
+        </div>
+
+        <div class="advantages">
+            <div class="advantage reveal">
+                <div class="advantage__icon">🎯</div>
+                <h3>Понятная цель</h3>
+                <p>Уже на первом занятии ученик знает, какую игру он сделает в конце курса.</p>
+            </div>
+            <div class="advantage reveal">
+                <div class="advantage__icon">🧩</div>
+                <h3>Маленькие шаги</h3>
+                <p>Каждая тема — это небольшая понятная задача, а не гора сложной информации.</p>
+            </div>
+            <div class="advantage reveal">
+                <div class="advantage__icon">💬</div>
+                <h3>Обратная связь</h3>
+                <p>Разбор домашних заданий и ответы на любые вопросы между занятиями.</p>
+            </div>
+            <div class="advantage reveal">
+                <div class="advantage__icon">🏆</div>
+                <h3>Результат</h3>
+                <p>В конце курса — своя работающая игра и сертификат о прохождении.</p>
+            </div>
+            <div class="advantage reveal">
+                <div class="advantage__icon">👥</div>
+                <h3>Мини-группы</h3>
+                <p>До 6 человек в группе, чтобы каждому хватило внимания преподавателя.</p>
+            </div>
+            <div class="advantage reveal">
+                <div class="advantage__icon">🕐</div>
+                <h3>Удобный график</h3>
+                <p>Занятия после школы и в выходные. Подбираем время под ученика.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ SIGNUP ============ -->
+<section class="section section--cta" id="signup">
+    <div class="container">
+        <div class="signup reveal">
+            <div class="signup__info">
+                <div class="section__tag">// Запись</div>
+                <h2 class="section__title">Первое занятие — бесплатно</h2>
+                <p>
+                    Оставьте заявку, и я свяжусь с вами в течение дня, чтобы подобрать удобное
+                    время и рассказать детали. Никаких обязательств.
+                </p>
+                <ul class="signup__list">
+                    <li>✓ Знакомство и постановка цели</li>
+                    <li>✓ Первый код уже на вводном уроке</li>
+                    <li>✓ Подбор группы и расписания</li>
+                </ul>
+            </div>
+
+            <form class="form" id="signupForm" novalidate>
+                <div class="form__group">
+                    <label for="name">Имя ученика</label>
+                    <input type="text" id="name" name="name" placeholder="Например, Артём" required>
+                    <span class="form__error" data-error-for="name"></span>
+                </div>
+
+                <div class="form__group">
+                    <label for="age">Возраст</label>
+                    <input type="number" id="age" name="age" placeholder="12–16" min="8" max="18" required>
+                    <span class="form__error" data-error-for="age"></span>
+                </div>
+
+                <div class="form__group">
+                    <label for="contact">Контакт родителя</label>
+                    <input type="text" id="contact" name="contact" placeholder="Телефон или Telegram" required>
+                    <span class="form__error" data-error-for="contact"></span>
+                </div>
+
+                <div class="form__group">
+                    <label for="comment">Комментарий <span class="optional">(необязательно)</span></label>
+                    <textarea id="comment" name="comment" rows="3" placeholder="Удобное время, вопросы…"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--full">
+                    Записаться на бесплатное занятие
+                </button>
+
+                <p class="form__note">
+                    Нажимая кнопку, вы соглашаетесь на обработку персональных данных.
+                </p>
+
+                <div class="form__success" id="formSuccess">
+                    ✅ Спасибо! Заявка отправлена. Я свяжусь с вами в ближайшее время.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container footer__inner">
+        <div class="footer__brand">
+            <span class="logo__bracket">&lt;</span>
+            <span class="logo__text">Точка Кода</span>
+            <span class="logo__bracket">/&gt;</span>
+        </div>
+        <p class="footer__text">Курсы программирования для школьников 12–16 лет</p>
+        <p class="footer__copy">© <span id="year"></span> Точка Кода. Все права защищены.</p>
+    </div>
+</footer>
+
+<!-- Кнопка наверх -->
+<button class="to-top" id="toTop" aria-label="Наверх">↑</button>
+
+<script src="script.js"></script>
+</body>
+</html>
