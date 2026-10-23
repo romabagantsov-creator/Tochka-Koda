@@ -3965,3 +3965,158 @@ section {
         transform: none;
     }
 }
+
+/* =========================================================
+   УВЕЛИЧЕНИЕ МАСШТАБА САЙТА
+   ========================================================= */
+
+/* Больше полезного пространства на компьютере */
+@media (min-width: 1100px) {
+    .wrap {
+        width: min(1240px, calc(100% - 64px));
+    }
+
+    .header {
+        padding-right: max(32px, calc((100% - 1240px) / 2));
+        padding-left: max(32px, calc((100% - 1240px) / 2));
+    }
+
+    /* Основной текст */
+    body {
+        font-size: 16px;
+    }
+
+    /* Заголовки */
+    .hero h1 {
+        font-size: clamp(48px, 5.7vw, 76px);
+    }
+
+    .section-head h2 {
+        font-size: clamp(36px, 4.2vw, 52px);
+    }
+
+    /* Текстовые описания */
+    .hero-lead {
+        font-size: 16px;
+    }
+
+    .section-head > p {
+        font-size: 15px;
+    }
+
+    /* Навигация */
+    .nav {
+        gap: 30px;
+    }
+
+    .nav > a {
+        font-size: 13px;
+    }
+
+    /* Кнопки */
+    .btn {
+        min-height: 52px;
+        padding: 14px 23px;
+        font-size: 13px;
+    }
+
+    /* Карточки */
+    .approach-item {
+        padding: 32px;
+    }
+
+    .approach-item h3 {
+        font-size: 20px;
+    }
+
+    .approach-item p {
+        font-size: 13px;
+    }
+
+    .price-card {
+        padding: 30px;
+    }
+
+    .price-card h3 {
+        font-size: 21px;
+    }
+
+    .price-card > p {
+        font-size: 12px;
+    }
+
+    .price-card li {
+        font-size: 11px;
+    }
+
+    /* Блоки и секции */
+    .section {
+        padding-top: 110px;
+        padding-bottom: 110px;
+    }
+
+    .hero {
+        column-gap: 75px;
+        padding-top: 105px;
+    }
+
+    /* Форма */
+    .contact-form {
+        gap: 21px;
+        padding: 30px;
+    }
+
+    .field label {
+        font-size: 12px;
+    }
+
+    .field input,
+    .field select {
+        min-height: 52px;
+        font-size: 13px;
+    }
+}
+
+/* Чуть крупнее текст на планшетах */
+@media (min-width: 761px) and (max-width: 1099px) {
+    .wrap {
+        width: calc(100% - 48px);
+    }
+
+    body {
+        font-size: 15px;
+    }
+
+    .hero-lead {
+        font-size: 15px;
+    }
+
+    .section {
+        padding-top: 85px;
+        padding-bottom: 85px;
+    }
+}
+
+/* Комфортная читаемость на телефонах */
+@media (max-width: 760px) {
+    .hero-lead {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    .section-head > p {
+        font-size: 13px;
+        line-height: 1.85;
+    }
+
+    .approach-item p,
+    .price-card > p {
+        font-size: 12px;
+    }
+
+    .field input,
+    .field select {
+        min-height: 50px;
+    }
+}
+
